@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.keyboard {
+    width: 900px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.top-row, .row, .bottom-row {
+    display: flex;
+    justify-content: center;
+}
+
+.key {
+    flex: 1;
+    height: 40px;
+    font-size: 14px;
+    background-color: #e0e0e0;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.key:hover {
+    background-color: #d0d0d0;
+}
+
+#input-field {
+    width: calc(100% - 40px);
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.space-key {
+    flex-grow: 6; 
+}
+
+.enter-key, .backspace-key, .tab-key, .capslock-key, .shift-key, .ctrl-key, .windows-key, .alt-key, .fn-key {
+    height: 40px;
+}
+
+.left-arrow-key, .right-arrow-key, .down-arrow-key {
+    font-size: 14px;
+}
+
+.shift-key, .right-shift-key {
+    flex-grow: 2; 
+}
+
+.capslock-key, .shift-key, .right-shift-key, .ctrl-key, .windows-key, .alt-key, .fn-key {
+    background-color: #b0bec5; 
+    font-size: 12px;
+    text-transform: uppercase; 
+    font-weight: bold; 
+}
