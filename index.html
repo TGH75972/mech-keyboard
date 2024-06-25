@@ -6,7 +6,7 @@
     <title>Mechanical Keyboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body style="background-color: #000;">
+<body>
     <div class="keyboard">
         <input type="text" id="input-field" placeholder="Type here..." autofocus>
         <div class="row top-row">
@@ -23,10 +23,10 @@
             <button class="key" data-key="0">0</button>
             <button class="key" data-key="-">-</button>
             <button class="key" data-key="=">=</button>
-            <button class="key backspace-key">Backspace</button>
+            <button class="key" data-key="Backspace">←</button>
         </div>
-        <div class="row top-row">
-            <button class="key tab-key">Tab</button>
+        <div class="row">
+            <button class="key" data-key="Tab">Tab</button>
             <button class="key" data-key="q">Q</button>
             <button class="key" data-key="w">W</button>
             <button class="key" data-key="e">E</button>
@@ -41,8 +41,8 @@
             <button class="key" data-key="]">]</button>
             <button class="key" data-key="\">\</button>
         </div>
-        <div class="row top-row">
-            <button class="key capslock-key">Caps</button>
+        <div class="row">
+            <button class="key capslock-key" data-key="CapsLock">Caps</button>
             <button class="key" data-key="a">A</button>
             <button class="key" data-key="s">S</button>
             <button class="key" data-key="d">D</button>
@@ -54,10 +54,10 @@
             <button class="key" data-key="l">L</button>
             <button class="key" data-key=";">;</button>
             <button class="key" data-key="'">'</button>
-            <button class="key enter-key">Enter</button>
+            <button class="key" data-key="Enter">Enter</button>
         </div>
-        <div class="row top-row">
-            <button class="key shift-key">Shift</button>
+        <div class="row">
+            <button class="key" data-key="Shift">Shift</button>
             <button class="key" data-key="z">Z</button>
             <button class="key" data-key="x">X</button>
             <button class="key" data-key="c">C</button>
@@ -68,14 +68,14 @@
             <button class="key" data-key=",">,</button>
             <button class="key" data-key=".">.</button>
             <button class="key" data-key="/">/</button>
-            <button class="key right-shift-key">Shift</button>
+            <button class="key" data-key="Shift">Shift</button>
         </div>
         <div class="row bottom-row">
-            <button class="key ctrl-key">Ctrl</button>
-            <button class="key windows-key">⊞ Win</button>
-            <button class="key alt-key">Alt</button>
-            <button class="key space-key">Space</button>
-            <button class="key fn-key">Fn</button>
+            <button class="key" data-key="Control">Ctrl</button>
+            <button class="key" data-key="Meta">⊞ Win</button>
+            <button class="key" data-key="Alt">Alt</button>
+            <button class="key space-key" data-key=" ">╾╾╾╾╾</button>
+            <button class="key" data-key="Fn">Fn</button>
         </div>
     </div>
     <script src="script.js"></script>
