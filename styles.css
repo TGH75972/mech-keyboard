@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: black;
     margin: 0;
 }
 
@@ -39,16 +39,16 @@ body {
     justify-content: center;
     align-items: center;
     animation: glow 1.5s ease-in-out infinite alternate; 
-    transition: background-color 0.3s ease-in-out; 
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; 
     box-shadow: 0 0 10px rgba(128, 0, 128, 0.8); 
     background-color: #ffffff;
 }
 
 .key:hover {
-    background-color: #f0f0f0; 
+    background-color: #ffcccc; 
     animation: none; 
+    color: #000000;
 }
-
 @keyframes glow {
     0% {
         box-shadow: 0 0 10px rgba(128, 0, 128, 0.9);
@@ -68,7 +68,7 @@ body {
 }
 
 .space-key {
-    flex-grow: 6; 
+    flex-grow: 4;
 }
 
 .enter-key, .backspace-key, .tab-key, .capslock-key, .shift-key, .ctrl-key, .windows-key, .alt-key, .fn-key {
@@ -76,10 +76,10 @@ body {
 }
 
 .shift-key, .right-shift-key {
-    flex-grow: 2; 
+    flex-grow: 1.5;
 }
 
-.capslock-key, .shift-key, .right-shift-key, .ctrl-key, .windows-key, .alt-key, .fn-key {
+.capslock-key {
     flex: 1.5;
     height: 40px;
     padding: 10px;
@@ -95,7 +95,4 @@ body {
     transition: background-color 0.3s ease-in-out;
 }
 
-.capslock-key.active {
-    background-color: #7e57c2;
-    color: #ffffff;
-}
+
