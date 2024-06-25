@@ -95,4 +95,39 @@ body {
     transition: background-color 0.3s ease-in-out;
 }
 
+#warn{
+    display: block;
+    position: absolute;
+    bottom: 500px;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+span{
+    display: inline-block;
+    color: white;
+    position: absolute;
+    left: -60px;
+    top: -5px;
+    animation: movement 1s ease-in 0.2s infinite;
+}
+
+@keyframes movement{
+    from{
+ color: white;
+ transform: translateX(0px);
+    }
+    to{
+color: red;
+transform: translateX(18px);
+    }
+}
+
+.capslock-key.active:hover,
+.shift-key.active:hover {
+    background-color: aquamarine;
+    color: black;
+}
 
