@@ -4,7 +4,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: black;
+    background-color: #f0f0f0;
     margin: 0;
 }
 
@@ -31,7 +31,6 @@ body {
     flex: 1;
     height: 40px;
     font-size: 14px;
-    background-color: #e0e0e0;
     border: 1px solid #cccccc;
     border-radius: 5px;
     margin-right: 5px;
@@ -39,10 +38,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: glow 1.5s ease-in-out infinite alternate; 
+    transition: background-color 0.3s ease-in-out; 
+    box-shadow: 0 0 10px rgba(128, 0, 128, 0.8); 
+    background-color: #ffffff;
 }
 
 .key:hover {
-    background-color: #d0d0d0;
+    background-color: #f0f0f0; 
+    animation: none; 
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(128, 0, 128, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(128, 0, 128, 0.9);
+    }
 }
 
 #input-field {
@@ -62,17 +75,27 @@ body {
     height: 40px;
 }
 
-.left-arrow-key, .right-arrow-key, .down-arrow-key {
-    font-size: 14px;
-}
-
 .shift-key, .right-shift-key {
     flex-grow: 2; 
 }
 
 .capslock-key, .shift-key, .right-shift-key, .ctrl-key, .windows-key, .alt-key, .fn-key {
-    background-color: #b0bec5; 
-    font-size: 12px;
-    text-transform: uppercase; 
-    font-weight: bold; 
+    flex: 1.5;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.capslock-key.active {
+    background-color: #7e57c2;
+    color: #ffffff;
 }
