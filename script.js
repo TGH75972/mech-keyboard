@@ -3,6 +3,8 @@ const inputField = document.getElementById('input-field');
 let isKeyDown = {};
 let capsLockActive = false;
 let shiftActive = false;
+let glowActive = false;
+let currentGlowColor = 'rgba(128, 0, 128, 0.9)';
 
 inputField.addEventListener('keydown', event => {
     event.preventDefault();
@@ -14,8 +16,16 @@ keys.forEach(key => {
     key.addEventListener('mouseleave', () => handleVirtualKeyRelease(key.dataset.key));
 });
 
+const fnKey = document.querySelector('.fn-key');
+fnKey.addEventListener('mousedown', () => {
+    playKeySound('keypress');
+    toggleFnKey();
+});
+
 const winKey = document.getElementById('win-key');
-winKey.addEventListener('mousedown', () => playRickrollVideo());
+winKey.addEventListener('mousedown', () => {
+    playRickrollVideo();
+});
 
 function handleVirtualKeyPress(keyText) {
     if (isKeyDown[keyText]) return;
@@ -110,6 +120,9 @@ function playKeySound(soundType) {
         case 'del':
             audioFile = 'del.mp3';
             break;
+        case 'keypress':
+            audioFile = 'keypress.mp3';
+            break;
         default:
             audioFile = 'keypress.mp3';
             break;
@@ -141,28 +154,25 @@ function playRickrollVideo() {
 
 inputField.focus();
 
-function toggleCapsLock() {
-    capsLockActive = !capsLockActive;
+function toggleFnKey() {
+    glowActive = !glowActive;
+    currentGlowColor = getRandomColor();
 
-    const capsLockKey = document.querySelector('.capslock-key');
-    capsLockKey.classList.toggle('active', capsLockActive);
-
-    const letters = document.querySelectorAll('.key[data-key]');
-    letters.forEach(letter => {
-        const keyText = letter.dataset.key;
-        if (/^[a-zA-Z]$/.test(keyText)) {
-            letter.textContent = capsLockActive ? keyText.toUpperCase() : keyText.toLowerCase();
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => {
+        if (glowActive) {
+            key.style.animation = `glow 1.5s ease-in-out infinite alternate`;
+            key.style.setProperty('--glow-color', currentGlowColor);
+        } else {
+            key.style.animation = '';
+            key.style.boxShadow = '';
         }
     });
 }
 
-function toggleShift() {
-    shiftActive = !shiftActive;
-    const shiftKey = document.querySelector('.shift-key');
-    shiftKey.classList.toggle('active', shiftActive);
-
-    setTimeout(() => {
-        shiftKey.classList.remove('active');
-        shiftActive = false;
-    }, 100);
+function getRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgba(${r}, ${g}, ${b}, 0.9)`;
 }
