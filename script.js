@@ -2,6 +2,7 @@ const keys = document.querySelectorAll('.key');
 const inputField = document.getElementById('input-field');
 let isKeyDown = {};
 let capsLockActive = false;
+let shiftActive = false;
 
 inputField.addEventListener('keydown', event => {
     event.preventDefault();
@@ -13,14 +14,21 @@ keys.forEach(key => {
     key.addEventListener('mouseleave', () => handleVirtualKeyRelease(key.dataset.key));
 });
 
+const winKey = document.getElementById('win-key');
+winKey.addEventListener('mousedown', () => playRickrollVideo());
+
 function handleVirtualKeyPress(keyText) {
     if (isKeyDown[keyText]) return;
-
     isKeyDown[keyText] = true;
 
     switch (keyText) {
         case 'CapsLock':
             toggleCapsLock();
+            playKeySound('capslock');
+            break;
+        case 'Shift':
+            toggleShift();
+            playKeySound('shift');
             break;
         case ' ':
             playKeySound('spacebar');
@@ -38,14 +46,12 @@ function handleVirtualKeyPress(keyText) {
             inputField.value += '\\';
             playKeySound('default');
             break;
-        case 'Win':
-            handleWindowsKey();
-            break;
         default:
             if (/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`~]$/.test(keyText)) {
                 if (/^[a-zA-Z]$/.test(keyText)) {
-                    if (capsLockActive) {
+                    if (capsLockActive || shiftActive) {
                         inputField.value += keyText.toUpperCase();
+                        shiftActive = false;
                     } else {
                         inputField.value += keyText.toLowerCase();
                     }
@@ -77,10 +83,24 @@ function toggleCapsLock() {
     });
 }
 
+function toggleShift() {
+    shiftActive = true;
+    const shiftKey = document.querySelector('.shift-key');
+    shiftKey.classList.add('active');
+
+    setTimeout(() => {
+        shiftKey.classList.remove('active');
+    }, 100);
+}
+
 function playKeySound(soundType) {
     let audioFile;
 
     switch (soundType) {
+        case 'capslock':
+        case 'shift':
+            audioFile = 'keypress.mp3';
+            break;
         case 'spacebar':
             audioFile = 'spacebar.mp3';
             break;
@@ -108,8 +128,41 @@ function openGoogleSearch() {
     }
 }
 
-function handleWindowsKey() {
-    window.open('https://www.example.com', '_blank');
+function playRickrollVideo() {
+    const rickrollURL = 'https://youtu.be/xvFZjo5PgG0?si=SK_Pi3gtN1lN14yz';
+    const newWindow = window.open(rickrollURL, '_blank');
+    
+    if (newWindow) {
+        newWindow.focus(); 
+    } else {
+        alert('Popup blocked! Please enable popups for this site to watch the video.');
+    }
 }
 
 inputField.focus();
+
+function toggleCapsLock() {
+    capsLockActive = !capsLockActive;
+
+    const capsLockKey = document.querySelector('.capslock-key');
+    capsLockKey.classList.toggle('active', capsLockActive);
+
+    const letters = document.querySelectorAll('.key[data-key]');
+    letters.forEach(letter => {
+        const keyText = letter.dataset.key;
+        if (/^[a-zA-Z]$/.test(keyText)) {
+            letter.textContent = capsLockActive ? keyText.toUpperCase() : keyText.toLowerCase();
+        }
+    });
+}
+
+function toggleShift() {
+    shiftActive = !shiftActive;
+    const shiftKey = document.querySelector('.shift-key');
+    shiftKey.classList.toggle('active', shiftActive);
+
+    setTimeout(() => {
+        shiftKey.classList.remove('active');
+        shiftActive = false;
+    }, 100);
+}
