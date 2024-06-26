@@ -5,6 +5,7 @@ let capsLockActive = false;
 let shiftActive = false;
 let glowActive = false;
 let currentGlowColor = 'rgba(128, 0, 128, 0.9)';
+let currentCtrlMode = 'copy';
 
 inputField.addEventListener('keydown', event => {
     event.preventDefault();
@@ -22,9 +23,22 @@ fnKey.addEventListener('mousedown', () => {
     toggleFnKey();
 });
 
-const winKey = document.getElementById('win-key');
+const winKey = document.querySelector('.win-key');
 winKey.addEventListener('mousedown', () => {
+    playKeySound('default');
     playRickrollVideo();
+});
+
+const modeKey = document.querySelector('.mode-key');
+modeKey.addEventListener('mousedown', () => {
+    playKeySound('mode');
+    toggleMode();
+});
+
+const ctrlKey = document.querySelector('.ctrl-key');
+ctrlKey.addEventListener('mousedown', () => {
+    playKeySound('ctrl');
+    toggleCtrl();
 });
 
 function handleVirtualKeyPress(keyText) {
@@ -33,24 +47,24 @@ function handleVirtualKeyPress(keyText) {
 
     switch (keyText) {
         case 'CapsLock':
+            playKeySound('default');
             toggleCapsLock();
-            playKeySound('capslock');
             break;
         case 'Shift':
+            playKeySound('default');
             toggleShift();
-            playKeySound('shift');
             break;
         case ' ':
-            playKeySound('spacebar');
             inputField.value += ' ';
+            playKeySound('spacebar');
             break;
         case 'Backspace':
-            playKeySound('del');
             inputField.value = inputField.value.slice(0, -1);
+            playKeySound('del');
             break;
         case 'Enter':
-            playKeySound('enter');
             openGoogleSearch();
+            playKeySound('enter');
             break;
         case '\\':
             inputField.value += '\\';
@@ -80,10 +94,8 @@ function handleVirtualKeyRelease(keyText) {
 
 function toggleCapsLock() {
     capsLockActive = !capsLockActive;
-
     const capsLockKey = document.querySelector('.capslock-key');
     capsLockKey.classList.toggle('active', capsLockActive);
-
     const letters = document.querySelectorAll('.key[data-key]');
     letters.forEach(letter => {
         const keyText = letter.dataset.key;
@@ -94,25 +106,22 @@ function toggleCapsLock() {
 }
 
 function toggleShift() {
-    shiftActive = true;
-    const shiftKey = document.querySelector('.shift-key');
-    shiftKey.classList.add('active');
-
-    setTimeout(() => {
-        shiftKey.classList.remove('active');
-    }, 100);
+    shiftActive = !shiftActive;
+    const shiftKeys = document.querySelectorAll('.shift-key');
+    shiftKeys.forEach(key => {
+        key.classList.toggle('active', shiftActive);
+    });
 }
 
 function playKeySound(soundType) {
     let audioFile;
-
     switch (soundType) {
         case 'capslock':
         case 'shift':
-            audioFile = 'keypress.mp3';
-            break;
+        case 'ctrl':
+        case 'mode':
         case 'spacebar':
-            audioFile = 'spacebar.mp3';
+            audioFile = 'keypress.mp3';
             break;
         case 'enter':
             audioFile = 'enter.mp3';
@@ -121,13 +130,10 @@ function playKeySound(soundType) {
             audioFile = 'del.mp3';
             break;
         case 'keypress':
-            audioFile = 'keypress.mp3';
-            break;
         default:
             audioFile = 'keypress.mp3';
             break;
     }
-
     const audio = new Audio(audioFile);
     audio.play();
 }
@@ -144,20 +150,16 @@ function openGoogleSearch() {
 function playRickrollVideo() {
     const rickrollURL = 'https://youtu.be/xvFZjo5PgG0?si=SK_Pi3gtN1lN14yz';
     const newWindow = window.open(rickrollURL, '_blank');
-    
     if (newWindow) {
-        newWindow.focus(); 
+        newWindow.focus();
     } else {
         alert('Popup blocked! Please enable popups for this site to watch the video.');
     }
 }
 
-inputField.focus();
-
 function toggleFnKey() {
     glowActive = !glowActive;
     currentGlowColor = getRandomColor();
-
     const keys = document.querySelectorAll('.key');
     keys.forEach(key => {
         if (glowActive) {
@@ -170,9 +172,48 @@ function toggleFnKey() {
     });
 }
 
+function toggleMode() {
+    if (currentCtrlMode === 'copy') {
+        currentCtrlMode = 'paste';
+    } else {
+        currentCtrlMode = 'copy';
+    }
+    alert(`Current mode: ${currentCtrlMode}`);
+}
+
+function toggleCtrl() {
+    switch (currentCtrlMode) {
+        case 'copy':
+            copyText();
+            break;
+        case 'paste':
+            pasteText();
+            break;
+        default:
+            break;
+    }
+}
+
+function copyText() {
+    inputField.select();
+    document.execCommand('copy');
+    playKeySound('ctrl');
+}
+
+function pasteText() {
+    navigator.clipboard.readText().then(text => {
+        inputField.value += text;
+        playKeySound('ctrl');
+    }).catch(err => {
+        console.error('Failed to read clipboard contents: ', err);
+    });
+}
+
 function getRandomColor() {
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     return `rgba(${r}, ${g}, ${b}, 0.9)`;
 }
+
+inputField.focus();
