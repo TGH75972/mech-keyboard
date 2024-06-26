@@ -75,7 +75,7 @@ body {
     flex-grow: 4;
 }
 
-.enter-key, .backspace-key, .tab-key, .capslock-key, .shift-key, .ctrl-key, .windows-key, .alt-key, .fn-key {
+.enter-key, .backspace-key, .tab-key, .capslock-key, .shift-key, .ctrl-key, .win-key, .alt-key, .fn-key {
     height: 40px;
 }
 
@@ -133,4 +133,14 @@ span{
 .shift-key.active:hover {
     background-color: aquamarine;
     color: black;
+}
+
+#message{
+    display: block;
+    position: absolute;
+    bottom: 550px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
