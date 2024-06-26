@@ -120,12 +120,12 @@ span{
 
 @keyframes movement{
     from{
- color: white;
- transform: translateX(0px);
+        color: white;
+        transform: translateX(0px);
     }
     to{
-color: red;
-transform: translateX(18px);
+        color: red;
+        transform: translateX(18px);
     }
 }
 
