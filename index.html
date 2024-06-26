@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <p id="message"><span>→ </span>Ctrl Modes : Copy and Paste Mode</p>
     <p id="warn"><span>→ </span>Do not Press the ⊞ Win Key </p>
     <div class="keyboard">
         <input type="text" id="input-field" placeholder="Type here..." autofocus>
@@ -69,13 +70,14 @@
             <button class="key" data-key=",">,</button>
             <button class="key" data-key=".">.</button>
             <button class="key" data-key="/">/</button>
-            <button class="key" data-key="Shift">Shift</button>
+            <button class="key shift-key" data-key="Shift">Shift</button>
         </div>
         <div class="row bottom-row">
-            <button class="key" data-key="Control">Ctrl</button>
-            <button class="key" data-key="Meta" id="win-key">⊞ Win</button>
-            <button class="key" data-key="Alt">Alt</button>
+            <button class="key ctrl-key" data-key="Control">Ctrl</button>
+            <button class="key win-key" data-key="Meta" id="win-key">⊞ Win</button>
+            <button class="key alt-key" data-key="Alt">Alt</button>
             <button class="key space-key" data-key=" ">╾╾╾╾╾</button>
+            <button class="key mode-key" data-key="Mode">Mode</button>
             <button class="key fn-key" data-key="Fn">Fn</button>
         </div>
     </div>
