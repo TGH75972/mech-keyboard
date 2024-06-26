@@ -79,7 +79,7 @@ body {
     height: 40px;
 }
 
-.shift-key, .right-shift-key {
+.shift-key, .enter-key{
     flex-grow: 1.5;
 }
 
